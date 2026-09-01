@@ -4,10 +4,15 @@ import os
 
 
 
-MODEL_PATH = "C:\\ROBOFEST\\ROBOFEST 6.0\\DRONE\\MINE\\best.pt"
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 
-# Image to test
-IMAGE_PATH = "C:\\ROBOFEST\\ROBOFEST 6.0\\DRONE\\MINE\\mine_1.jpg"
+# Model path (defaults to best.pt in script directory or specified path)
+DEFAULT_MODEL = os.path.join(SCRIPT_DIR, "best.pt")
+MODEL_PATH = DEFAULT_MODEL if os.path.exists(DEFAULT_MODEL) else "C:\\ROBOFEST\\ROBOFEST 6.0\\DRONE\\MINE\\best.pt"
+
+# Image to test (defaults to mine_1.jpg or multi_mine_1.jpg in script directory)
+DEFAULT_IMAGE = os.path.join(SCRIPT_DIR, "mine_1.jpg")
+IMAGE_PATH = DEFAULT_IMAGE if os.path.exists(DEFAULT_IMAGE) else "C:\\ROBOFEST\\ROBOFEST 6.0\\DRONE\\MINE\\mine_1.jpg"
 
 # Minimum confidence required
 CONFIDENCE = 0.40
@@ -19,6 +24,7 @@ CONFIDENCE = 0.40
 
 if not os.path.exists(MODEL_PATH):
     print("ERROR: best.pt not found!")
+    print(f"Looked at: {MODEL_PATH}")
     print("Make sure best.pt is in the same folder as this Python file.")
     exit()
 

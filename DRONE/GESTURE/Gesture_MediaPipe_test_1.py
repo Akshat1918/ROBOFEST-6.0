@@ -12,7 +12,19 @@ from mediapipe.tasks.python import vision
 # CONFIGURATION
 # ============================================================
 
-MODEL_PATH = "gesture_recognizer.task"
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+PARENT_DIR = os.path.dirname(SCRIPT_DIR)
+ROOT_DIR = os.path.dirname(PARENT_DIR)
+
+# Look for existing model in current dir, script dir, parent dir, or root dir
+potential_paths = [
+    "gesture_recognizer.task",
+    os.path.join(SCRIPT_DIR, "gesture_recognizer.task"),
+    os.path.join(PARENT_DIR, "gesture_recognizer.task"),
+    os.path.join(ROOT_DIR, "gesture_recognizer.task"),
+]
+
+MODEL_PATH = next((p for p in potential_paths if os.path.exists(p)), os.path.join(SCRIPT_DIR, "gesture_recognizer.task"))
 
 MODEL_URL = (
     "https://storage.googleapis.com/mediapipe-tasks/"
