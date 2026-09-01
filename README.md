@@ -153,21 +153,63 @@ To guarantee safe UAV operations, gesture recognition includes state-machine fil
 | **`Pointing_Up`**| ☝️ | **ASCENT / ELEVATION** | Incremental altitude gain command |
 | **`No Hand`** | 🚫 | **HOVER / READY** | Maintains current altitude and station coordinates |
 
+### 📸 Gesture Teleoperation HUD Interface
+
+<div align="center">
+
+| **Takeoff Trigger (1.0s Safety Hold Confirmed)** | **Standby / Ready HUD Mode** |
+| :---: | :---: |
+| <img src="DRONE/GESTURE/Screenshot%20(2191).png" alt="Takeoff Trigger UI" width="480" /> | <img src="DRONE/GESTURE/Screenshot%20(2192).png" alt="Drone Ready Standby UI" width="480" /> |
+| *Visual alert banner with green feedback* | *Real-time FPS, gesture category, and drone status* |
+
+</div>
+
 ---
 
-## 🎯 Custom Landmine YOLO Model Architecture
+## 🎯 Custom Landmine YOLO Model Architecture & Detection Results
 
 The mine detection pipeline is engineered to locate surface and partially obscured landmines across challenging terrains:
 
-```mermaid
-graph LR
-    A[Aerial / Ground Image] --> B[YOLO Feature Extractor]
-    B --> C[Multi-Scale Feature Pyramid]
-    C --> D[Detection Head]
-    D --> E[Confidence Filter >= 0.40]
-    D --> F[Non-Maximum Suppression]
-    E & F --> G[Multi-Mine Localization & Bounding Boxes]
 ```
+┌─────────────────────────────────┐
+│  Aerial / Ground Image Input    │
+└────────────────┬────────────────┘
+                 │
+                 ▼
+┌─────────────────────────────────┐
+│     YOLO Feature Extractor      │
+│  (Backbone & Feature Pyramid)   │
+└────────────────┬────────────────┘
+                 │
+                 ▼
+┌─────────────────────────────────┐
+│      Multi-Scale Detect Head    │
+│  (Anchor-Free Object Detection) │
+└────────────────┬────────────────┘
+                 │
+                 ▼
+┌─────────────────────────────────┐
+│    Confidence Filter (>= 0.40)  │
+│  & Non-Maximum Suppression(NMS) │
+└────────────────┬────────────────┘
+                 │
+                 ▼
+┌─────────────────────────────────┐
+│    Multi-Mine Localization &    │
+│    Bounding Box Coordinates     │
+└─────────────────────────────────┘
+```
+
+### 📸 Detection Visual Results
+
+<div align="center">
+
+| **Single Mine Detection** | **Multi-Mine Simultaneous Detection** |
+| :---: | :---: |
+| <img src="DRONE/MINE/Screenshot%20(2188).png" alt="Single Mine Detection" width="480" /> | <img src="DRONE/MINE/Screenshot%20(2189).png" alt="Multi-Mine Simultaneous Detection" width="480" /> |
+| *Single target identified with high confidence* | *Multiple clustered mines detected in one pass* |
+
+</div>
 
 - **Multi-Target Detection**: Can identify isolated single mines as well as clustered minefields (`multi_mine_1.jpg`) in a single pass.
 - **Confidence Thresholding**: Configurable minimum threshold (`CONFIDENCE = 0.40`) to balance sensitivity and false-positive rejection.

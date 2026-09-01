@@ -33,23 +33,49 @@ This module provides a **touchless, vision-based teleoperation interface** for U
 
 ## 🏗️ Technical Architecture & Pipeline
 
-```mermaid
-flowchart TD
-    A[Webcam Feed / Video Stream] --> B[Mirror Frame cv2.flip]
-    B --> C[Convert BGR to RGB]
-    C --> D[Wrap in mp.Image with timestamp]
-    D --> E[MediaPipe GestureRecognizer.recognize_for_video]
-    E --> F{Gesture Detected?}
-    F -- No --> G[Set 'NO HAND' & 'DRONE READY']
-    F -- Yes --> H[Extract Category & Confidence Score]
-    H --> I{Gesture == 'Open_Palm' & Conf >= 0.40?}
-    I -- Yes --> J{Palm Held Time >= 1.0s?}
-    J -- Yes --> K[Trigger TAKEOFF COMMAND]
-    J -- No --> L[Display Countdown: 'HOLD PALM Xs']
-    I -- No --> M[Reset Hold Timer & Display Gesture]
-    G & K & L & M --> N[Render Custom OpenCV HUD]
-    N --> O[Display Window: 'Drone Gesture Control']
 ```
+┌─────────────────────────────────┐
+│  Webcam Feed / Video Stream     │
+└────────────────┬────────────────┘
+                 │
+                 ▼
+┌─────────────────────────────────┐
+│  Frame Mirror & BGR->RGB Convert│
+└────────────────┬────────────────┘
+                 │
+                 ▼
+┌─────────────────────────────────┐
+│  MediaPipe Gesture Recognizer   │
+│  (Landmark Track & Classify)    │
+└────────────────┬────────────────┘
+                 │
+                 ▼
+┌─────────────────────────────────┐
+│  Safety Gate: 1.0s Palm Hold?   │
+│  - Hold >= 1.0s -> TAKEOFF      │
+│  - Hold <  1.0s -> COUNTDOWN    │
+│  - Other Gesture -> RESET TIMER │
+└────────────────┬────────────────┘
+                 │
+                 ▼
+┌─────────────────────────────────┐
+│  Render OpenCV Head-Up Display  │
+│  (FPS + Cards + Status Banner)  │
+└─────────────────────────────────┘
+```
+
+---
+
+## 📸 Teleoperation HUD Interface
+
+<div align="center">
+
+| **Takeoff Trigger (1.0s Palm Hold)** | **Drone Ready / Standby Mode** |
+| :---: | :---: |
+| <img src="Screenshot%20(2191).png" alt="Takeoff Trigger Confirmed" width="480" /> | <img src="Screenshot%20(2192).png" alt="Drone Ready Standby HUD" width="480" /> |
+| *Takeoff command activated after 1-second hold* | *Live HUD displaying FPS, gesture, and drone telemetry* |
+
+</div>
 
 ---
 

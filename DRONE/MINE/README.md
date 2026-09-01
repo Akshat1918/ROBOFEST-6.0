@@ -13,20 +13,56 @@ This module implements an **automated vision-based landmine detection system** f
 
 ---
 
-## 🏗️ Detection Pipeline
+## 🏗️ Detection Pipeline Architecture
 
-```mermaid
-flowchart LR
-    A[Aerial Recon Image / Stream] --> B[Image Resizing & Normalization 640x640]
-    B --> C[YOLO Backbone & Feature Pyramid]
-    C --> D[Multi-Mine Detection Head]
-    D --> E{Confidence >= Threshold 0.40?}
-    E -- No --> F[Discard Low Confidence Box]
-    E -- Yes --> G[Non-Maximum Suppression NMS]
-    G --> H[Render Bounding Box on Image]
-    G --> I[Log Coordinates x1, y1, x2, y2 to Console]
-    H & I --> J[Annotated Visual Window & Telemetry]
 ```
+┌─────────────────────────────────┐
+│  Aerial Recon Image / Stream    │
+└────────────────┬────────────────┘
+                 │
+                 ▼
+┌─────────────────────────────────┐
+│  Image Resizing (640x640)       │
+│  & Pixel Normalization          │
+└────────────────┬────────────────┘
+                 │
+                 ▼
+┌─────────────────────────────────┐
+│  YOLO Feature Backbone & FPN    │
+│  (Deep Feature Extraction)      │
+└────────────────┬────────────────┘
+                 │
+                 ▼
+┌─────────────────────────────────┐
+│  Multi-Mine Detection Head      │
+│  (Class Score & Bounding Box)   │
+└────────────────┬────────────────┘
+                 │
+                 ▼
+┌─────────────────────────────────┐
+│  Confidence Threshold Filter    │
+│  & Non-Maximum Suppression(NMS) │
+└────────────────┬────────────────┘
+                 │
+                 ▼
+┌─────────────────────────────────┐
+│  Annotated Visual Window &      │
+│  Console Telemetry Output       │
+└─────────────────────────────────┘
+```
+
+---
+
+## 📸 Detection Visual Results
+
+<div align="center">
+
+| **Single Mine Detection (`mine_1.jpg`)** | **Multi-Mine Detection (`multi_mine_1.jpg`)** |
+| :---: | :---: |
+| <img src="Screenshot%20(2188).png" alt="Single Mine Detection" width="480" /> | <img src="Screenshot%20(2189).png" alt="Multi-Mine Detection" width="480" /> |
+| *Single target detected with high confidence* | *Concurrent multi-target localization* |
+
+</div>
 
 ---
 
