@@ -56,17 +56,17 @@ ROBOFEST 6.0/
     ├── GESTURE/
     │   ├── Gesture_MediaPipe_test_1.py# Real-time gesture recognition & HUD interface
     │   ├── README.md                  # Detailed Gesture module documentation
-    │   ├── Screen Recording ...mp4    # Demo recording of live gesture HUD
-    │   ├── Screenshot (2191).png      # UI screenshot (Takeoff trigger)
-    │   └── Screenshot (2192).png      # UI screenshot (Standby / idle)
+    │   ├── MediaPipe_Gesture_Detection_Testing.mp4 # Demo recording of live gesture HUD
+    │   ├── GESTURE_DETECTION_TAKEOFF.png # UI screenshot (Takeoff trigger)
+    │   └── GESTURE_DETECTION_NO_HAND.png # UI screenshot (Standby / idle)
     │
     └── MINE/
         ├── mine_detection_1.py        # YOLO multi-mine inference script
         ├── best.pt                    # Custom-trained YOLO model weights
         ├── mine_1.jpg                 # Single-mine test image
         ├── multi_mine_1.jpg           # Multi-mine simultaneous test image
-        ├── Screenshot (2188).png      # Detection result screenshot (Single mine)
-        ├── Screenshot (2189).png      # Detection result screenshot (Multiple mines)
+        ├── Single_Mine_Detection.png  # Detection result screenshot (Single mine)
+        ├── Multiple_Mine_Detection.png # Detection result screenshot (Multiple mines)
         └── README.md                  # Detailed Mine Detection module documentation
 ```
 
@@ -159,7 +159,7 @@ To guarantee safe UAV operations, gesture recognition includes state-machine fil
 
 | **Takeoff Trigger (1.0s Safety Hold Confirmed)** | **Standby / Ready HUD Mode** |
 | :---: | :---: |
-| <img src="DRONE/GESTURE/Screenshot%20(2191).png" alt="Takeoff Trigger UI" width="480" /> | <img src="DRONE/GESTURE/Screenshot%20(2192).png" alt="Drone Ready Standby UI" width="480" /> |
+| <img src="DRONE/GESTURE/GESTURE_DETECTION_TAKEOFF.png" alt="Takeoff Trigger UI" width="480" /> | <img src="DRONE/GESTURE/GESTURE_DETECTION_NO_HAND.png" alt="Drone Ready Standby UI" width="480" /> |
 | *Visual alert banner with green feedback* | *Real-time FPS, gesture category, and drone status* |
 
 </div>
@@ -206,7 +206,7 @@ The mine detection pipeline is engineered to locate surface and partially obscur
 
 | **Single Mine Detection** | **Multi-Mine Simultaneous Detection** |
 | :---: | :---: |
-| <img src="DRONE/MINE/Screenshot%20(2188).png" alt="Single Mine Detection" width="480" /> | <img src="DRONE/MINE/Screenshot%20(2189).png" alt="Multi-Mine Simultaneous Detection" width="480" /> |
+| <img src="DRONE/MINE/Single_Mine_Detection.png" alt="Single Mine Detection" width="480" /> | <img src="DRONE/MINE/Multiple_Mine_Detection.png" alt="Multi-Mine Simultaneous Detection" width="480" /> |
 | *Single target identified with high confidence* | *Multiple clustered mines detected in one pass* |
 
 </div>

@@ -59,7 +59,7 @@ This module implements an **automated vision-based landmine detection system** f
 
 | **Single Mine Detection (`mine_1.jpg`)** | **Multi-Mine Detection (`multi_mine_1.jpg`)** |
 | :---: | :---: |
-| <img src="Screenshot%20(2188).png" alt="Single Mine Detection" width="480" /> | <img src="Screenshot%20(2189).png" alt="Multi-Mine Detection" width="480" /> |
+| <img src="Single_Mine_Detection.png" alt="Single Mine Detection" width="480" /> | <img src="Multiple_Mine_Detection.png" alt="Multi-Mine Detection" width="480" /> |
 | *Single target detected with high confidence* | *Concurrent multi-target localization* |
 
 </div>
@@ -72,8 +72,8 @@ This module implements an **automated vision-based landmine detection system** f
 - **`best.pt`**: Serialized PyTorch/Ultralytics model weights from custom training.
 - **`mine_1.jpg`**: Single landmine evaluation image.
 - **`multi_mine_1.jpg`**: Multi-landmine cluster evaluation image for validating concurrent detection.
-- **`Screenshot (2188).png`**: Output visual showing single mine detection.
-- **`Screenshot (2189).png`**: Output visual showing multiple simultaneous mine detections.
+- **`Single_Mine_Detection.png`**: Output visual showing single mine detection.
+- **`Multiple_Mine_Detection.png`**: Output visual showing multiple simultaneous mine detections.
 
 ---
 

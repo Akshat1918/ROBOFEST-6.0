@@ -72,7 +72,7 @@ This module provides a **touchless, vision-based teleoperation interface** for U
 
 | **Takeoff Trigger (1.0s Palm Hold)** | **Drone Ready / Standby Mode** |
 | :---: | :---: |
-| <img src="Screenshot%20(2191).png" alt="Takeoff Trigger Confirmed" width="480" /> | <img src="Screenshot%20(2192).png" alt="Drone Ready Standby HUD" width="480" /> |
+| <img src="GESTURE_DETECTION_TAKEOFF.png" alt="Takeoff Trigger Confirmed" width="480" /> | <img src="GESTURE_DETECTION_NO_HAND.png" alt="Drone Ready Standby HUD" width="480" /> |
 | *Takeoff command activated after 1-second hold* | *Live HUD displaying FPS, gesture, and drone telemetry* |
 
 </div>
